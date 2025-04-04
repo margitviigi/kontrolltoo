@@ -1,12 +1,24 @@
+import { useEffect, useState } from "react";
 
 const Meals = () => {
-    return (
-        <ul id="meals">
-            { 
-               
-            }
-        </ul>
-    )
-}
+  const [data, setData] = useState([]);
 
-export default Meals
+  useEffect(() => {
+    fetch("http://localhost:3001/meals")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Ühendus puudub");
+        }
+        return response.json();
+      })
+      .then((jsonData) => {
+        console.log(jsonData);
+        setData(jsonData);
+      })
+      .catch((error) => {
+        console.error("Viga:", error);
+      });
+  }, []);
+};
+
+export default Meals;
