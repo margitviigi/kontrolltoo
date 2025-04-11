@@ -1,4 +1,3 @@
-//import './Button.css'
 
 const Button = ({ textOnly, onClick, type, children }) => {
     return (

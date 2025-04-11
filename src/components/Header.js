@@ -1,29 +1,28 @@
 import { useContext } from 'react';
-import logo from '../assets/logo.jpg';
+import CartContext from '../store/CartContext'; // kontrolli ka tee õigsust!
 import Button from './UI/Button';
-import CartContext from '../store/CartContext';
+import logo from '../assets/logo.jpg';
 
-const Header = () => {
-    const cartCtx = useContext(CartContext);
+const Header = ({ onCartClick }) => {
+  const cartCtx = useContext(CartContext);
 
-    const totalItems = cartCtx.items.reduce(
-        (total, item) => total + item.amount,
-        0
-    );
+  const totalItems = cartCtx.items.reduce((total, item) => {
+    return total + item.amount;
+  }, 0);
 
-    return (
-        <header id="main-header">
-            <div id="title">
-                <img src={logo}/>
-                <h1>Food Order App</h1>
-            </div>
-            <nav>
-            <Button textOnly={true} onClick={() => console.log("Klikk")}>
-            Cart ({totalItems})
-            </Button>
-            </nav>
-        </header>
-    )
-}
+  return (
+    <header id="main-header">
+      <div id="title">
+        <img src={logo} alt="Logo" />
+        <h1>Food Order App</h1>
+      </div>
+      <nav>
+        <Button textOnly onClick={onCartClick}>
+          Cart ({totalItems})
+        </Button>
+      </nav>
+    </header>
+  );
+};
 
-export default Header
+export default Header;
